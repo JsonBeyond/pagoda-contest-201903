@@ -8,4 +8,8 @@ import com.jfinal.core.Controller;
  * @Version 1.0
  */
 public class LoginController extends Controller {
+
+    public void login(){
+
+    }
 }

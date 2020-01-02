@@ -1,8 +1,8 @@
-package com.pagoda.hdtt.interceptor;
+package com.pagoda.hdtt.common.interceptor;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
-import com.pagoda.hdtt.exception.ServiceException;
+import com.pagoda.hdtt.common.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;

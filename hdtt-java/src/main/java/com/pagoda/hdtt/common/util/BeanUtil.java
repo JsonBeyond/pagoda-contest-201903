@@ -1,4 +1,4 @@
-package com.pagoda.hdtt.util;
+package com.pagoda.hdtt.common.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

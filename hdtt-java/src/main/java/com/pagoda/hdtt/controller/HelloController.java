@@ -2,8 +2,8 @@ package com.pagoda.hdtt.controller;
 
 import com.jfinal.plugin.activerecord.Page;
 import com.pagoda.hdtt.aotogen.MsgTemplate;
-import com.pagoda.hdtt.exception.ServiceException;
-import com.pagoda.hdtt.util.BeanUtil;
+import com.pagoda.hdtt.common.exception.ServiceException;
+import com.pagoda.hdtt.common.util.BeanUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
