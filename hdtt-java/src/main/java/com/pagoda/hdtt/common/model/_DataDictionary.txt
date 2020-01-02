@@ -1,0 +1,26 @@
+Table: msg_template
+--------------+--------------+------+-----+-------------------+---------
+ Field        | Type         | Null | Key | Default           | Remarks 
+--------------+--------------+------+-----+-------------------+---------
+ templateID   | INT(10)      | NO   | PRI |                   |         
+ createDate   | DATETIME(19) | NO   |     | CURRENT_TIMESTAMP | 创建时间    
+ updateDate   | DATETIME(19) | YES  |     | CURRENT_TIMESTAMP | 更新时间    
+ platformType | VARCHAR(255) | NO   |     |                   | 平台类型(dingding:钉钉;  wechat:微信; wswork:企业微信;  sms:短信;  email:邮件)
+ functionType | VARCHAR(255) | YES  |     |                   | 接口功能类型(11: 钉钉_工作通知消息;  12:钉钉_群消息  13:钉钉_普通消息  待补充..)
+ msgType      | VARCHAR(255) | YES  |     |                   | 消息类型(11: 钉钉_文本消息   12:钉钉_图片消息  13:钉钉_语言消息 14:钉钉_文件消息  15:钉钉_链接消息  16:钉钉_OA消息  17:钉钉_markdown消息  18:钉钉_卡片消息)
+ title        | VARCHAR(512) | NO   |     |                   | 标题      
+ content      | TEXT(65535)  | YES  |     |                   | 消息内容    
+ url          | VARCHAR(512) | YES  |     |                   | 调整链接    
+ picUrl       | VARCHAR(512) | YES  |     |                   | 图片链接    
+ others       | TEXT(65535)  | YES  |     |                   | 消息其他数据  
+--------------+--------------+------+-----+-------------------+---------
+
+Table: user
+-------+--------------+------+-----+---------+---------
+ Field | Type         | Null | Key | Default | Remarks 
+-------+--------------+------+-----+---------+---------
+ id    | INT(10)      | NO   | PRI |         |         
+ age   | INT(10)      | YES  |     |         |         
+ name  | VARCHAR(255) | YES  |     |         |         
+-------+--------------+------+-----+---------+---------
+

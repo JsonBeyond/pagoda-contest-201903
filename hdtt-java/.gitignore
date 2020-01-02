@@ -1,0 +1,43 @@
+
+*/target
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+/old/
+/logs/
+/catalina.base_IS_UNDEFINED/
+
+### for mac OS
+.DS_Store
+
+/target
+
+/Permanent_Data/
+Permanent_Data/
+src/main/java/com/hst/project/sceneweb/web/Test.java
+src/main/java/com/hst/project/sceneweb/web/XlxTestController.java
+disconf/
+src/main/resources/application-dev-21010.properties
+src/main/resources/application-dev-21010.properties.lock
+
+.gitignore
