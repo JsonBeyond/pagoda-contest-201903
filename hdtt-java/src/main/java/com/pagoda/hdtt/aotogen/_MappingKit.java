@@ -1,4 +1,4 @@
-package com.pagoda.hdtt.common.model;
+package com.pagoda.hdtt.aotogen;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 

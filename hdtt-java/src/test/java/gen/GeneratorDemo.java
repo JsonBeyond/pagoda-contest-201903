@@ -23,13 +23,13 @@ public class GeneratorDemo {
 	
 	public static void main(String[] args) {
 		// base model 所使用的包名
-		String baseModelPackageName = "com.pagoda.hdtt.common.model.base";
+		String baseModelPackageName = "com.pagoda.hdtt.aotogen.base";
 		// base model 文件保存路径
-		//D:\project_space\hdtt\src\main\java\com\pagoda\hdtt\common\model\base
-		String baseModelOutputDir = PathKit.getWebRootPath() + "/src/main/java/com/pagoda/hdtt/common/model/base";
+		//
+		String baseModelOutputDir = PathKit.getWebRootPath() + "/src/main/java/com/pagoda/hdtt/aotogen/base";
 		
 		// model 所使用的包名 (MappingKit 默认使用的包名)
-		String modelPackageName = "com.pagoda.hdtt.common.model";
+		String modelPackageName = "com.pagoda.hdtt.aotogen";
 		// model 文件保存路径 (MappingKit 与 DataDictionary 文件默认保存路径)
 		String modelOutputDir = baseModelOutputDir + "/..";
 		

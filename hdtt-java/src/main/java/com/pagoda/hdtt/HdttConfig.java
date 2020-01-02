@@ -7,15 +7,17 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
-import com.pagoda.hdtt.common.model.MsgTemplate;
-import com.pagoda.hdtt.common.model._MappingKit;
+import com.pagoda.hdtt.aotogen._MappingKit;
+import com.pagoda.hdtt.controller.HelloController;
+import com.pagoda.hdtt.controller.LoginController;
+import com.pagoda.hdtt.interceptor.GlobalExceptionInterceptor;
 
 /**
  * @Author xieluxin
  * @Date 2019/12/31 16:01
  * @Version 1.0
  */
-public class HdttJfinalConfig extends JFinalConfig {
+public class HdttConfig extends JFinalConfig {
     @Override
     public void configConstant(Constants me) {
 
@@ -27,7 +29,8 @@ public class HdttJfinalConfig extends JFinalConfig {
 
     @Override
     public void configRoute(Routes me) {
-        me.add("/",HelloController.class);
+        me.add("/template", HelloController.class);
+        me.add("/login", LoginController.class);
     }
 
     @Override
@@ -54,7 +57,8 @@ public class HdttJfinalConfig extends JFinalConfig {
 
     @Override
     public void configInterceptor(Interceptors me) {
-
+        //添加全局action层S拦截器
+        me.add(new GlobalExceptionInterceptor());
     }
 
     @Override

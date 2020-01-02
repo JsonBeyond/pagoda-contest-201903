@@ -1,4 +1,4 @@
-package com.pagoda.hdtt.common.model.base;
+package com.pagoda.hdtt.aotogen.base;
 
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.IBean;
