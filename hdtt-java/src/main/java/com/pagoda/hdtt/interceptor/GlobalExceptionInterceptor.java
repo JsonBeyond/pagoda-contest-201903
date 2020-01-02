@@ -1,4 +1,4 @@
-package com.pagoda.hdtt.common.interceptor;
+package com.pagoda.hdtt.interceptor;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;

@@ -25,12 +25,36 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		return getInt("age");
 	}
 
-	public void setName(java.lang.String name) {
-		set("name", name);
+	public void setPhone(java.lang.String phone) {
+		set("phone", phone);
 	}
 	
-	public java.lang.String getName() {
-		return getStr("name");
+	public java.lang.String getPhone() {
+		return getStr("phone");
+	}
+
+	public void setPassword(java.lang.String password) {
+		set("password", password);
+	}
+	
+	public java.lang.String getPassword() {
+		return getStr("password");
+	}
+
+	public void setNickName(java.lang.String nickName) {
+		set("nick_name", nickName);
+	}
+	
+	public java.lang.String getNickName() {
+		return getStr("nick_name");
+	}
+
+	public void setStatus(java.lang.String status) {
+		set("status", status);
+	}
+	
+	public java.lang.String getStatus() {
+		return getStr("status");
 	}
 
 }

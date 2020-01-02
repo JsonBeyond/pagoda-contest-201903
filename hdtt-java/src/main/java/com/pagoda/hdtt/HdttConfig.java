@@ -10,7 +10,7 @@ import com.jfinal.template.Engine;
 import com.pagoda.hdtt.aotogen._MappingKit;
 import com.pagoda.hdtt.controller.HelloController;
 import com.pagoda.hdtt.controller.LoginController;
-import com.pagoda.hdtt.common.interceptor.GlobalExceptionInterceptor;
+import com.pagoda.hdtt.interceptor.GlobalExceptionInterceptor;
 
 /**
  * @Author xieluxin
