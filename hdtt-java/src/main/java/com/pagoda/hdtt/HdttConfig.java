@@ -10,6 +10,7 @@ import com.jfinal.template.Engine;
 import com.pagoda.hdtt.aotogen._MappingKit;
 import com.pagoda.hdtt.controller.HelloController;
 import com.pagoda.hdtt.controller.LoginController;
+import com.pagoda.hdtt.interceptor.CrossInterceptor;
 import com.pagoda.hdtt.interceptor.GlobalExceptionInterceptor;
 
 /**
@@ -30,7 +31,7 @@ public class HdttConfig extends JFinalConfig {
     @Override
     public void configRoute(Routes me) {
         me.add("/template", HelloController.class);
-        me.add("/login", LoginController.class);
+        me.add("/account", LoginController.class);
     }
 
     @Override
@@ -59,6 +60,7 @@ public class HdttConfig extends JFinalConfig {
     public void configInterceptor(Interceptors me) {
         //添加全局action层S拦截器
         me.add(new GlobalExceptionInterceptor());
+        me.add(new CrossInterceptor());
     }
 
     @Override
