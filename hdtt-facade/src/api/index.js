@@ -92,7 +92,7 @@ fetch.aopSend(config => {
 // });
 
 // 创建场景demo数据
-export const login = (params) => fetch('/hdtt/account/login', params);
+export const login = (params) => fetch('/hdtt/account/login', params, 'post');
 // 更新场景demo数据
 export const updateSceneDemoData = (params) => fetch('/scene/scene-config/demo-data', params, 'PUT');
 

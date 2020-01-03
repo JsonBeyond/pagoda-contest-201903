@@ -8,12 +8,12 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: resolve => require(['../views/About.vue'], resolve),
+    component: resolve => require(['../views/login.vue'], resolve),
   },
   {
-    name: 'layout',
+    name: 'login',
     path: '/',
-    component: resolve => require(['../views/layout.vue'], resolve),
+    component: resolve => require(['../views/login.vue'], resolve),
     children: [
       {
         name: '首页',
