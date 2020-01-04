@@ -1,9 +1,12 @@
 package com.pagoda.hdtt.websocket;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.jfinal.plugin.activerecord.Db;
 import com.pagoda.hdtt.aotogen.Question;
 import com.pagoda.hdtt.common.util.BeanUtil;
+import com.pagoda.hdtt.controller.DialogController;
+import com.pagoda.hdtt.invoke.client.TulingClient;
 import com.pagoda.hdtt.model.output.SendMessageOutput;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -28,6 +31,7 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.netty.handler.codec.http.HttpUtil.isKeepAlive;
 
@@ -94,26 +98,32 @@ public class NioWebSocketHandler extends SimpleChannelInboundHandler<Object> {
                     "%s frame types not supported", frame.getClass().getName()));
         }
         // 返回应答消息
-        String request = ((TextWebSocketFrame) frame).text();
-        logger.debug("服务端收到：" + request);
-        String test;
+        String requestParam = ((TextWebSocketFrame) frame).text();
+        JSONObject jsonObject = JSON.parseObject(requestParam);
+        String message = jsonObject.getString("message");
+        Integer userId = jsonObject.getInteger("userId");
+
+        logger.debug("服务端收到：" + message);
+        DialogController.insertHistory(message,userId,"user",null);
+        String replyMessage;
         //封装关联的问题列表
         List<Question> questionList;
-        if (BeanUtil.checkIsEmpty(request)) {
-            test = "我是机器人果果，恭候您多时，很高兴为您服务！您可以发送文字告诉果果您要咨询的问题喔~";
+        if (BeanUtil.checkIsEmpty(message)) {
+            replyMessage = "我是机器人果果，恭候您多时，很高兴为您服务！您可以发送文字告诉果果您要咨询的问题喔~";
             questionList = Question.dao.find("SELECT * FROM question ORDER BY weight DESC LIMIT 8");
         } else {
             //1.调用图灵接口 发送消息并获取回复内容
-//        test = TulingClient.sendTulingMessage(message);
-            test = "为了省着点用,返回模拟回复";
+            replyMessage = TulingClient.sendTulingMessage(message);
+//            replyMessage = "为了省着点用,返回模拟回复";
             questionList = Question.dao.find("SELECT * FROM question ORDER BY rand() LIMIT 3");
-            new Thread(() -> Db.update("UPDATE question set weight=weight+1 WHERE question = ?", test)).start();
+            List<Integer> relationIdList = questionList.stream().map(question -> question.getId()).collect(Collectors.toList());
+            DialogController.insertHistory(replyMessage,userId,"tuling", relationIdList);
+            new Thread(() -> Db.update("UPDATE question set weight=weight+1 WHERE question = ?", replyMessage)).start();
         }
         SendMessageOutput output = new SendMessageOutput();
 
-        output.setReplyMessage(test);
+        output.setReplyMessage(replyMessage);
         output.setQuestionList(questionList);
-//        output.setId(ctx.channel().id());
         TextWebSocketFrame tws = new TextWebSocketFrame(JSON.toJSONString(output));
         // 返回【谁发的发给谁】
         ctx.channel().writeAndFlush(tws);

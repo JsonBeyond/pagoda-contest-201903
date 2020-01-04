@@ -69,7 +69,7 @@ public class DialogController extends BaseAPIController{
      * @param creator
      * @param createType
      */
-    private void insertHistory(String message,Integer creator,String createType,List<Integer> relationIdList){
+    public static void insertHistory(String message,Integer creator,String createType,List<Integer> relationIdList){
 
         if(BeanUtil.checkIsEmpty(message)){
             return;
