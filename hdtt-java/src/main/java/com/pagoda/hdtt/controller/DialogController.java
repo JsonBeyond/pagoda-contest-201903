@@ -1,6 +1,7 @@
 package com.pagoda.hdtt.controller;
 
 import com.google.common.base.Joiner;
+import com.alibaba.fastjson.JSON;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.pagoda.hdtt.aotogen.Dialog;
@@ -12,6 +13,8 @@ import com.pagoda.hdtt.model.output.SendMessageOutput;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import sun.rmi.runtime.Log;
+import com.pagoda.hdtt.websocket.ChannelSupervise;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,5 +85,14 @@ public class DialogController extends BaseAPIController{
         }
 
         boolean save = record.save();
+    }
+
+    public void sendAll(String message){
+        SendMessageOutput output = new SendMessageOutput();
+        output.setReplyMessage(message);
+        TextWebSocketFrame tws = new TextWebSocketFrame(JSON.toJSONString(output));
+        // 群发
+        ChannelSupervise.send2All(tws);
+        successResponse("success");
     }
 }

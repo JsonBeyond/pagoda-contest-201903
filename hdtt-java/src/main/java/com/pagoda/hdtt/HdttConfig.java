@@ -12,6 +12,8 @@ import com.pagoda.hdtt.aotogen._MappingKit;
 import com.pagoda.hdtt.controller.*;
 import com.pagoda.hdtt.interceptor.CrossInterceptor;
 import com.pagoda.hdtt.interceptor.GlobalExceptionInterceptor;
+import com.pagoda.hdtt.websocket.NioWebSocketHandler;
+import com.pagoda.hdtt.websocket.NioWebSocketServer;
 
 /**
  * @Author xieluxin
@@ -71,6 +73,11 @@ public class HdttConfig extends JFinalConfig {
 
     @Override
     public void configHandler(Handlers me) {
+    }
+
+    @Override
+    public void afterJFinalStart() {
+        new Thread(() -> new NioWebSocketServer().init()).start();
 
     }
 
