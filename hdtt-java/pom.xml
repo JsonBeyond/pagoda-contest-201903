@@ -124,6 +124,11 @@
             <version>9.4.9.v20180320</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0-rc2</version>
+        </dependency>
         <!--netty的依赖集合，都整合在一个依赖里面了-->
         <dependency>
             <groupId>io.netty</groupId>

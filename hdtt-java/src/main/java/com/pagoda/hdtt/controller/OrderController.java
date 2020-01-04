@@ -29,12 +29,16 @@ public class OrderController extends BaseAPIController {
     /**
      * 查询订单列表
      */
-    public void queryOrderList(Integer page,Integer pageSize,Integer userId){
+    public void queryOrderList(Integer page,Integer pageSize,Integer userId, String goodsName){
         String sqlExceptSelect = "from hd_order where 1=1 ";
         List<Object> params = new ArrayList<>();
         if(BeanUtil.checkIsNotEmpty(userId)){
             sqlExceptSelect += " and userId =?";
             params.add(userId);
+        }
+        if(BeanUtil.checkIsNotEmpty(goodsName)){
+            sqlExceptSelect += " and goodsName like ?";
+            params.add("%" + goodsName + " %");
         }
         sqlExceptSelect += " order by id desc";
 
