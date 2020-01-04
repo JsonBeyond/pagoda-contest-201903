@@ -102,6 +102,7 @@ public class NioWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         JSONObject jsonObject = JSON.parseObject(requestParam);
         String message = jsonObject.getString("message");
         Integer userId = jsonObject.getInteger("userId");
+        String type = jsonObject.getString("type");
 
         logger.debug("服务端收到：" + message);
         DialogController.insertHistory(message,userId,"user",null);
