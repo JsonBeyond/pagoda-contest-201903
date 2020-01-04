@@ -112,18 +112,18 @@
         </dependency>
 
         <!--websocket-->
-<!--        <dependency>-->
-<!--            <groupId>org.eclipse.jetty.websocket</groupId>-->
-<!--            <artifactId>websocket-server</artifactId>-->
-<!--            <version>9.4.9.v20180320</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.eclipse.jetty.websocket</groupId>-->
-<!--            <artifactId>javax-websocket-server-impl</artifactId>-->
-<!--            <version>9.4.9.v20180320</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-server</artifactId>
+            <version>9.4.9.v20180320</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>javax-websocket-server-impl</artifactId>
+            <version>9.4.9.v20180320</version>
+            <scope>provided</scope>
+        </dependency>
         <!--netty的依赖集合，都整合在一个依赖里面了-->
         <dependency>
             <groupId>io.netty</groupId>

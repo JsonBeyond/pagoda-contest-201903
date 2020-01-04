@@ -17,7 +17,8 @@ public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
 		arp.addMapping("msg_template", "templateID", MsgTemplate.class);
-		arp.addMapping("repository_content", "id", RepositoryContent.class);
+		// Composite Primary Key order: delete,id
+		arp.addMapping("question", "delete,id", Question.class);
 		arp.addMapping("user", "id", User.class);
 	}
 }

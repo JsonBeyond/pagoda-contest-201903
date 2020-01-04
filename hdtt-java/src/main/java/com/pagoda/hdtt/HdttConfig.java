@@ -3,7 +3,6 @@ package com.pagoda.hdtt;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.json.FastJsonFactory;
-import com.jfinal.json.Json;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
@@ -16,7 +15,7 @@ import com.pagoda.hdtt.controller.LoginController;
 import com.pagoda.hdtt.controller.RepositoryContentController;
 import com.pagoda.hdtt.interceptor.CrossInterceptor;
 import com.pagoda.hdtt.interceptor.GlobalExceptionInterceptor;
-import com.pagoda.hdtt.invoke.dto.TulingDialogInputDTO;
+import com.pagoda.hdtt.websocket.NioWebSocketHandler;
 import com.pagoda.hdtt.websocket.NioWebSocketServer;
 
 /**
@@ -76,12 +75,12 @@ public class HdttConfig extends JFinalConfig {
 
     @Override
     public void configHandler(Handlers me) {
-
     }
 
     @Override
     public void afterJFinalStart() {
-        new NioWebSocketServer().init();
+        new Thread(() -> new NioWebSocketServer().init()).start();
+
     }
 
     public static void main(String[] args) {
