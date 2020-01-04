@@ -15,6 +15,20 @@ Table: msg_template
  others       | TEXT(65535)  | YES  |     |                   | 消息其他数据  
 --------------+--------------+------+-----+-------------------+---------
 
+Table: repository_content
+-------------+--------------+------+-----+---------+---------
+ Field       | Type         | Null | Key | Default | Remarks 
+-------------+--------------+------+-----+---------+---------
+ id          | INT(10)      | NO   | PRI |         |         
+ create_date | DATETIME(19) | YES  |     |         | 创建时间    
+ update_date | DATETIME(19) | YES  |     |         | 更新时间    
+ title       | VARCHAR(255) | YES  |     |         | 知识库标题   
+ question    | VARCHAR(255) | YES  |     |         | 知识库问题   
+ answer      | VARCHAR(255) | YES  |     |         | 知识库答案   
+ creater     | VARCHAR(255) | YES  |     |         | 创建人     
+ delete      | TINYINT(3)   | YES  |     |         | 是否已删除(0:未删除   1:已删除)
+-------------+--------------+------+-----+---------+---------
+
 Table: user
 -----------+--------------+------+-----+---------+---------
  Field     | Type         | Null | Key | Default | Remarks 

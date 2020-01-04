@@ -10,6 +10,7 @@ import com.jfinal.template.Engine;
 import com.pagoda.hdtt.aotogen._MappingKit;
 import com.pagoda.hdtt.controller.HelloController;
 import com.pagoda.hdtt.controller.LoginController;
+import com.pagoda.hdtt.controller.RepositoryContentController;
 import com.pagoda.hdtt.interceptor.CrossInterceptor;
 import com.pagoda.hdtt.interceptor.GlobalExceptionInterceptor;
 
@@ -32,6 +33,7 @@ public class HdttConfig extends JFinalConfig {
     public void configRoute(Routes me) {
         me.add("/template", HelloController.class);
         me.add("/account", LoginController.class);
+        me.add("/repository-content", RepositoryContentController.class);
     }
 
     @Override
