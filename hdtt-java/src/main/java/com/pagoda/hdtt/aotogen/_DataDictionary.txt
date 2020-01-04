@@ -15,6 +15,23 @@ Table: msg_template
  others       | TEXT(65535)  | YES  |     |                   | 消息其他数据  
 --------------+--------------+------+-----+-------------------+---------
 
+Table: order
+------------+---------------+------+-----+-------------------+---------
+ Field      | Type          | Null | Key | Default           | Remarks 
+------------+---------------+------+-----+-------------------+---------
+ id         | INT(10)       | NO   | PRI |                   |         
+ createDate | DATETIME(19)  | YES  |     | CURRENT_TIMESTAMP | 创建时间    
+ updateDate | DATETIME(19)  | YES  |     | CURRENT_TIMESTAMP | 更新时间    
+ goodsName  | VARCHAR(255)  | YES  |     |                   | 商品名称    
+ price      | DECIMAL(10,2) | YES  |     |                   | 单价      
+ count      | INT(10)       | YES  |     |                   | 数量      
+ countUnit  | VARCHAR(255)  | YES  |     |                   | 数量单位(斤; 个;盒d等等)
+ totalMoney | VARCHAR(255)  | YES  |     |                   | 总金额     
+ status     | VARCHAR(255)  | YES  |     |                   | 状态      
+ url        | VARCHAR(2048) | YES  |     |                   | 图片地址    
+ userId     | INT(10)       | YES  |     |                   | 用户id    
+------------+---------------+------+-----+-------------------+---------
+
 Table: question
 --------------------+--------------+------+-----+-------------------+---------
  Field              | Type         | Null | Key | Default           | Remarks 
@@ -39,6 +56,6 @@ Table: user
  phone    | VARCHAR(255) | YES  |     |         | 账号      
  password | VARCHAR(255) | YES  |     |         | 密码      
  nickName | VARCHAR(255) | YES  |     |         | 用户昵称    
- status   | VARCHAR(255) | YES  |     |         | 状态      
+ status   | VARCHAR(255) | YES  |     |         | 状态(0:无效  1:有效)
 ----------+--------------+------+-----+---------+---------
 

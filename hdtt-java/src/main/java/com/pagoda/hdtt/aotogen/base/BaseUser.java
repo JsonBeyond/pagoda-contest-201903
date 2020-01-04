@@ -74,14 +74,14 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 	}
 
 	/**
-	 * 状态
+	 * 状态(0:无效  1:有效)
 	 */
 	public void setStatus(java.lang.String status) {
 		set("status", status);
 	}
 	
 	/**
-	 * 状态
+	 * 状态(0:无效  1:有效)
 	 */
 	public java.lang.String getStatus() {
 		return getStr("status");
