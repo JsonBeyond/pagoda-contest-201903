@@ -17,6 +17,7 @@ import com.pagoda.hdtt.controller.RepositoryContentController;
 import com.pagoda.hdtt.interceptor.CrossInterceptor;
 import com.pagoda.hdtt.interceptor.GlobalExceptionInterceptor;
 import com.pagoda.hdtt.invoke.dto.TulingDialogInputDTO;
+import com.pagoda.hdtt.websocket.NioWebSocketServer;
 
 /**
  * @Author xieluxin
@@ -76,6 +77,11 @@ public class HdttConfig extends JFinalConfig {
     @Override
     public void configHandler(Handlers me) {
 
+    }
+
+    @Override
+    public void afterJFinalStart() {
+        new NioWebSocketServer().init();
     }
 
     public static void main(String[] args) {
