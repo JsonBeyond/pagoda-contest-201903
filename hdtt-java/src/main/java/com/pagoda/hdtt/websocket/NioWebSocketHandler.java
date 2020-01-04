@@ -26,6 +26,8 @@ import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.util.CharsetUtil;
+import jdk.nashorn.internal.runtime.regexp.joni.constants.StringType;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -106,21 +108,26 @@ public class NioWebSocketHandler extends SimpleChannelInboundHandler<Object> {
 
         logger.debug("服务端收到：" + message);
         DialogController.insertHistory(message,userId,"user",null);
-        String replyMessage;
+        String replyMessage = null;
         //封装关联的问题列表
-        List<Question> questionList;
-        if (BeanUtil.checkIsEmpty(message)) {
-            replyMessage = "我是机器人果果，恭候您多时，很高兴为您服务！您可以发送文字告诉果果您要咨询的问题喔~";
-            questionList = Question.dao.find("SELECT * FROM question ORDER BY weight DESC LIMIT 8");
-        } else {
-            //1.调用图灵接口 发送消息并获取回复内容
-            replyMessage = TulingClient.sendTulingMessage(message);
+        List<Question> questionList = null;
+        if(StringUtils.equals(type,"order")){
+            replyMessage = "亲，请问您想咨询这个订单什么问题呀？";
+        }else{
+            if (BeanUtil.checkIsEmpty(message)) {
+                replyMessage = "我是机器人果果，恭候您多时，很高兴为您服务！您可以发送文字告诉果果您要咨询的问题喔~";
+                questionList = Question.dao.find("SELECT * FROM question ORDER BY weight DESC LIMIT 8");
+            } else {
+                //1.调用图灵接口 发送消息并获取回复内容
+                replyMessage = TulingClient.sendTulingMessage(message);
 //            replyMessage = "为了省着点用,返回模拟回复";
-            questionList = Question.dao.find("SELECT * FROM question ORDER BY rand() LIMIT 3");
-            List<Integer> relationIdList = questionList.stream().map(question -> question.getId()).collect(Collectors.toList());
-            DialogController.insertHistory(replyMessage,userId,"tuling", relationIdList);
-            new Thread(() -> Db.update("UPDATE question set weight=weight+1 WHERE question = ?", replyMessage)).start();
+                questionList = Question.dao.find("SELECT * FROM question ORDER BY rand() LIMIT 3");
+                List<Integer> relationIdList = questionList.stream().map(question -> question.getId()).collect(Collectors.toList());
+                DialogController.insertHistory(replyMessage,userId,"tuling", relationIdList);
+//                new Thread(() -> Db.update("UPDATE question set weight=weight+1 WHERE question = ?", replyMessage)).start();
+            }
         }
+
         SendMessageOutput output = new SendMessageOutput();
 
         output.setReplyMessage(replyMessage);
