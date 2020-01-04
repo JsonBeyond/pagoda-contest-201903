@@ -1,3 +1,26 @@
+Table: dialog
+------------+--------------+------+-----+-------------------+---------
+ Field      | Type         | Null | Key | Default           | Remarks 
+------------+--------------+------+-----+-------------------+---------
+ id         | INT(10)      | NO   | PRI |                   |         
+ createDate | DATETIME(19) | YES  |     | CURRENT_TIMESTAMP | 创建时间    
+ updateDate | DATETIME(19) | YES  |     | CURRENT_TIMESTAMP | 更新时间    
+ userId     | INT(10)      | YES  |     |                   | 用户id    
+------------+--------------+------+-----+-------------------+---------
+
+Table: dialog_record
+--------------------+--------------+------+-----+-------------------+---------
+ Field              | Type         | Null | Key | Default           | Remarks 
+--------------------+--------------+------+-----+-------------------+---------
+ id                 | INT(10)      | NO   | PRI |                   |         
+ createDate         | DATETIME(19) | YES  |     | CURRENT_TIMESTAMP | 创建时间    
+ message            | VARCHAR(255) | YES  |     |                   | 消息内容    
+ createType         | VARCHAR(255) | YES  |     |                   | 创建类型(tuling:机器人  user:用户)
+ creator            | INT(10)      | YES  |     |                   | 创建人     
+ relationQuestionId | VARCHAR(255) | YES  |     |                   | 关联的问题id列表,逗号分隔
+ dialogId           | INT(10)      | YES  |     |                   | 会话id    
+--------------------+--------------+------+-----+-------------------+---------
+
 Table: hd_order
 ------------+---------------+------+-----+-------------------+---------
  Field      | Type          | Null | Key | Default           | Remarks 
@@ -42,20 +65,22 @@ Table: question
  question           | VARCHAR(255) | YES  |     |                   | 知识库标题   
  answer             | VARCHAR(255) | YES  |     |                   | 知识库内容   
  creater            | VARCHAR(255) | YES  |     |                   | 创建人     
- relationQuestionId | INT(10)      | YES  |     |                   | 关联问题id列表,逗号分隔
+ relationQuestionId | VARCHAR(11)  | YES  |     |                   | 关联问题id列表,逗号分隔
+ weight             | INT(10)      | YES  |     |                   | 权重      
  priseCount         | INT(10)      | YES  |     |                   | 点赞数     
  delete             | TINYINT(3)   | NO   | PRI | 0                 | 是否已删除(0:未删除   1:已删除)
 --------------------+--------------+------+-----+-------------------+---------
 
 Table: user
-----------+--------------+------+-----+---------+---------
- Field    | Type         | Null | Key | Default | Remarks 
-----------+--------------+------+-----+---------+---------
- id       | INT(10)      | NO   | PRI |         |         
- age      | INT(10)      | YES  |     |         | 年龄      
- phone    | VARCHAR(255) | YES  |     |         | 账号      
- password | VARCHAR(255) | YES  |     |         | 密码      
- nickName | VARCHAR(255) | YES  |     |         | 用户昵称    
- status   | VARCHAR(255) | YES  |     |         | 状态(0:无效  1:有效)
-----------+--------------+------+-----+---------+---------
+----------+---------------+------+-----+---------+---------
+ Field    | Type          | Null | Key | Default | Remarks 
+----------+---------------+------+-----+---------+---------
+ id       | INT(10)       | NO   | PRI |         |         
+ age      | INT(10)       | YES  |     |         | 年龄      
+ phone    | VARCHAR(255)  | YES  |     |         | 账号      
+ password | VARCHAR(255)  | YES  |     |         | 密码      
+ nickName | VARCHAR(255)  | YES  |     |         | 用户昵称    
+ status   | VARCHAR(255)  | YES  |     |         | 状态(0:无效  1:有效)
+ icon     | VARCHAR(2048) | YES  |     |         | 用户头像地址  
+----------+---------------+------+-----+---------+---------
 
