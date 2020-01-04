@@ -25,8 +25,6 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.util.CharsetUtil;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static io.netty.handler.codec.http.HttpUtil.isKeepAlive;
