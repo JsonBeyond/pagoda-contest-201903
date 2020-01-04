@@ -102,6 +102,20 @@ public abstract class BaseQuestion<M extends BaseQuestion<M>> extends Model<M> i
 	}
 
 	/**
+	 * 权重
+	 */
+	public void setWeight(java.lang.Integer weight) {
+		set("weight", weight);
+	}
+	
+	/**
+	 * 权重
+	 */
+	public java.lang.Integer getWeight() {
+		return getInt("weight");
+	}
+
+	/**
 	 * 点赞数
 	 */
 	public void setPriseCount(java.lang.Integer priseCount) {

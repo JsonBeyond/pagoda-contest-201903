@@ -87,4 +87,18 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		return getStr("status");
 	}
 
+	/**
+	 * 用户头像地址
+	 */
+	public void setIcon(java.lang.String icon) {
+		set("icon", icon);
+	}
+	
+	/**
+	 * 用户头像地址
+	 */
+	public java.lang.String getIcon() {
+		return getStr("icon");
+	}
+
 }
