@@ -16,8 +16,8 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 public class _MappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
+		arp.addMapping("hd_order", "id", HdOrder.class);
 		arp.addMapping("msg_template", "templateID", MsgTemplate.class);
-		arp.addMapping("order", "id", Order.class);
 		// Composite Primary Key order: delete,id
 		arp.addMapping("question", "delete,id", Question.class);
 		arp.addMapping("user", "id", User.class);
