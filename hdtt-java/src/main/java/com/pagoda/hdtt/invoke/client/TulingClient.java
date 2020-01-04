@@ -31,7 +31,7 @@ public class TulingClient {
      * @param inputMessage
      * @return
      */
-    public static Object sendTulingMessage(String inputMessage){
+    public static String sendTulingMessage(String inputMessage){
 
         TulingDialogInputDTO inputDTO = new TulingDialogInputDTO();
         InputTextDTO textDTO = new InputTextDTO();
