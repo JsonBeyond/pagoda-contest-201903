@@ -70,7 +70,7 @@ export default {
         login({phone: this.username, password: this.password}).then(res => {
           if (res.status === 10000) {
             localStorage.setItem('user_info', JSON.stringify(res.result))
-            this.$router.push({path: '/home'});
+            this.$router.push({path: '/consult'});
           }
         })
       }

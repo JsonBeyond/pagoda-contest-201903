@@ -94,7 +94,7 @@ fetch.aopReceive(response => {
 // 创建场景demo数据
 export const login = (params) => fetch('/hdtt/account/login', params, 'post');
 // 更新场景demo数据
-export const updateSceneDemoData = (params) => fetch('/scene/scene-config/demo-data', params, 'PUT');
+export const getGoodsList = (params) => fetch('/hdtt/order/queryOrderList', params);
 
 // 场景发布
 export const postScenePublish = (params, id) => fetch(`/scene/scene-config/scene-publish/${id}`, params, 'POST');
