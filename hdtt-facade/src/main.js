@@ -14,7 +14,7 @@ Vue.use(ElementUi, { size: 'mini' })
 import pagodaComponents from 'pagoda-ui'
 
 Vue.use(pagodaComponents)
-
+// window.localStorage.clear()
 new Vue({
   router,
   store,

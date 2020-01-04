@@ -2,6 +2,7 @@
   <div id="portal">
     <pagoda-layout
       :side-menu="sideMenu"
+      :user-info="userInfo"
       :on-logout="handleLogout"
       :on-operate-item-click="handleOperateItemClick"
       :side-menu-props="sideMenuProps"
@@ -14,7 +15,7 @@
           src="http://erp2.hwdev.pagoda.com.cn/store/static/img/left_nav_logo.5da9ac7.png"
           class="logo"
         />
-        <span class="logo-text" v-show="!scope.collapse">百果园</span>
+        <span class="logo-text" v-show="!scope.collapse">互动天团</span>
       </div>
       <!-- 内容插槽 -->
       <div class="content" v-loading="loading">
@@ -43,7 +44,7 @@ export default {
           {
             tabName: '1111',
             label: '11111',
-            url: '/about'
+            url: '/home'
           },
           {
             tabName: '2222',
@@ -57,7 +58,10 @@ export default {
           }
         ]
       }
-    ]
+    ],
+    userInfo: {
+      userName: JSON.parse(window.localStorage.getItem('user_info')).userName
+    }
   }),
   methods: {
     handleTabsChange(data) {
@@ -65,7 +69,10 @@ export default {
       // window.history.pushState({}, data.label, data.url);
       this.$router.push(data.url);
     },
-    handleLogout() {},
+    handleLogout() {
+      window.localStorage.clear()
+      this.$router.replace({path: 'login'})
+    },
     handleOperateItemClick() {
       // 当前点击的操作项配置
     }
