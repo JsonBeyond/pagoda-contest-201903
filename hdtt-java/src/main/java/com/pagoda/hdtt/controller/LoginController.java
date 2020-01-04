@@ -1,5 +1,6 @@
 package com.pagoda.hdtt.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
@@ -10,6 +11,7 @@ import com.pagoda.hdtt.common.util.BeanUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author xieluxin
@@ -37,16 +39,17 @@ public class LoginController extends BaseAPIController {
 
     /**
      * 登陆
-     * @param phone 手机
-     * @param password 密码
      */
-    public void login(String phone,String password){
+    public void login(){
+        JSONObject jsonObject = getJsonModel(JSONObject.class);
+        String phone = jsonObject.getString("phone");
+        String password = jsonObject.getString("password");
 
         Record user = Db.findFirst("select * from user where phone=?", phone);
         if(BeanUtil.checkIsEmpty(user)){
             throw new ServiceException("该账号还未注册!");
         }
-        if(StringUtils.equals(user.getStr("password"),password)){
+        if(!StringUtils.equals(user.getStr("password"),password)){
             throw new ServiceException("密码错误!");
         }
         getRequest().getSession().setAttribute(ProjectConstant.SESSION_USER, user);
@@ -64,5 +67,13 @@ public class LoginController extends BaseAPIController {
         }
         getRequest().getSession().removeAttribute(ProjectConstant.SESSION_USER);
         successResponse(true);
+    }
+
+    /**
+     * 注销
+     * @param userId 用户id
+     */
+    public void websocket(String userId){
+        render("index.jsp");
     }
 }

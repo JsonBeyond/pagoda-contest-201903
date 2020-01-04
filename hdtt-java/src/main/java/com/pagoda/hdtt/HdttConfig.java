@@ -2,16 +2,18 @@ package com.pagoda.hdtt;
 
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
+import com.jfinal.json.FastJsonFactory;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.pagoda.hdtt.aotogen._MappingKit;
-import com.pagoda.hdtt.controller.HelloController;
-import com.pagoda.hdtt.controller.LoginController;
+import com.pagoda.hdtt.controller.*;
 import com.pagoda.hdtt.interceptor.CrossInterceptor;
 import com.pagoda.hdtt.interceptor.GlobalExceptionInterceptor;
+import com.pagoda.hdtt.websocket.NioWebSocketHandler;
+import com.pagoda.hdtt.websocket.NioWebSocketServer;
 
 /**
  * @Author xieluxin
@@ -26,12 +28,18 @@ public class HdttConfig extends JFinalConfig {
         PropKit.use("config.properties");
 		me.setDevMode(true);
         me.setViewType(ViewType.JSP);
+//        me.setJsonFactory(new FastJsonFactory());
+        FastJsonFactory factory = new FastJsonFactory();
+
     }
 
     @Override
     public void configRoute(Routes me) {
         me.add("/template", HelloController.class);
         me.add("/account", LoginController.class);
+        me.add("/dialog", DialogController.class);
+        me.add("/repository-content", RepositoryContentController.class);
+        me.add("/order", OrderController.class);
     }
 
     @Override
@@ -65,6 +73,11 @@ public class HdttConfig extends JFinalConfig {
 
     @Override
     public void configHandler(Handlers me) {
+    }
+
+    @Override
+    public void afterJFinalStart() {
+        new Thread(() -> new NioWebSocketServer().init()).start();
 
     }
 

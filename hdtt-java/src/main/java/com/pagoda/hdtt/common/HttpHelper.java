@@ -1,4 +1,4 @@
-package com.pagoda.hdtt.invoke.client;
+package com.pagoda.hdtt.common;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.pagoda.hdtt.common.exception.InvokeException;
