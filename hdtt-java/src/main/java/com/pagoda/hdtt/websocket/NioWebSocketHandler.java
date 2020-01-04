@@ -97,13 +97,13 @@ public class NioWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         }
         // 返回应答消息
         String requestParam = ((TextWebSocketFrame) frame).text();
+        logger.debug("服务端收到：" + requestParam);
         JSONObject jsonObject = JSON.parseObject(requestParam);
         String message = jsonObject.getString("message");
         Integer userId = jsonObject.getInteger("userId");
         String type = jsonObject.getString("type");
 
-        logger.debug("服务端收到：" + message);
-        DialogController.insertHistory(message,userId,"user",null);
+        DialogController.insertHistory(message, userId, "user", null);
         String replyMessage;
         //封装关联的问题列表
         List<Question> questionList;
@@ -116,8 +116,8 @@ public class NioWebSocketHandler extends SimpleChannelInboundHandler<Object> {
 //            replyMessage = "为了省着点用,返回模拟回复";
             questionList = Question.dao.find("SELECT * FROM question ORDER BY rand() LIMIT 3");
             List<Integer> relationIdList = questionList.stream().map(question -> question.getId()).collect(Collectors.toList());
-            DialogController.insertHistory(replyMessage,userId,"tuling", relationIdList);
-            new Thread(() -> Db.update("UPDATE question set weight=weight+1 WHERE question = ?", replyMessage)).start();
+            DialogController.insertHistory(replyMessage, userId, "tuling", relationIdList);
+            new Thread(() -> Db.update("UPDATE question set weight=weight+1 WHERE question like ?", "%" + message + "%")).start();
         }
         SendMessageOutput output = new SendMessageOutput();
 
