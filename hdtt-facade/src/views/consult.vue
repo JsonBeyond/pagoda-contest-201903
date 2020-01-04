@@ -3,7 +3,7 @@
       <el-container class="box">
         <el-main>
           <el-container>
-            <el-main class="consult-box">
+            <el-main class="consult-box" id="chatBox-content-demo">
               <div v-for="(item, idx) of msgsList" :key="idx" class="news-box">
                 <div class="right" v-if="item.sendNews">
                   <el-container>
@@ -134,7 +134,7 @@ export default {
     }, 
     websocketonopen() {
       console.log("WebSocket连接成功");
-      this.websocket.send({});
+      this.websocket.send(JSON.stringify({}));
     },
     websocketonerror(e) { //错误
       console.log("WebSocket连接发生错误");
@@ -150,13 +150,17 @@ export default {
       }
       this.msge = '';
       this.msgsList.push(obj)
+      this.$nextTick(() => {
+        let container = this.$el.querySelector("#chatBox-content-demo");
+        container.scrollTop = container.scrollHeight;
+      })
     },
     websocketsend(agentData){ //数据发送 
-      this.websocket.send({
+      this.websocket.send(JSON.stringify({
         message: this.textarea,
         userId: JSON.parse(window.localStorage.getItem('user_info')).id,
         type: 'common'
-      });
+      }));
       this.msge = this.textarea;
       this.textarea = '';
     },
@@ -164,11 +168,11 @@ export default {
       console.log("connection closed (" + e.code + ")"); 
     },
     questionSend(name) {
-      this.websocket.send({
-        message: this.textarea,
+      this.websocket.send(JSON.stringify({
+        message: name,
         userId: JSON.parse(window.localStorage.getItem('user_info')).id,
         type: 'common'
-      });
+      }));
       this.msge = name;
     },
     seachGoods() {
@@ -192,12 +196,13 @@ export default {
       this.seachGoods()
     },
     consultGoods(row) {
-      this.websocket.send({
+      this.websocket.send(JSON.stringify({
         message: row.row.id,
         userId: JSON.parse(window.localStorage.getItem('user_info')).id,
         type: 'order'
-      });
+      }));
       this.msge = row.row.goodsName
+      this.dialogVisible = false
     }
   }
 }
