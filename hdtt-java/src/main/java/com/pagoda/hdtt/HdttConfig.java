@@ -13,6 +13,7 @@ import com.pagoda.hdtt.aotogen._MappingKit;
 import com.pagoda.hdtt.controller.DialogController;
 import com.pagoda.hdtt.controller.HelloController;
 import com.pagoda.hdtt.controller.LoginController;
+import com.pagoda.hdtt.controller.RepositoryContentController;
 import com.pagoda.hdtt.interceptor.CrossInterceptor;
 import com.pagoda.hdtt.interceptor.GlobalExceptionInterceptor;
 import com.pagoda.hdtt.invoke.dto.TulingDialogInputDTO;
@@ -40,6 +41,7 @@ public class HdttConfig extends JFinalConfig {
         me.add("/template", HelloController.class);
         me.add("/account", LoginController.class);
         me.add("/dialog", DialogController.class);
+        me.add("/repository-content", RepositoryContentController.class);
     }
 
     @Override

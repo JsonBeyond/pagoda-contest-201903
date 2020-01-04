@@ -23,7 +23,7 @@ public abstract class BaseRepositoryContent<M extends BaseRepositoryContent<M>> 
 	public void setCraeteDate(java.util.Date craeteDate) {
 		set("craeteDate", craeteDate);
 	}
-	
+
 	/**
 	 * 创建时间
 	 */
@@ -37,7 +37,7 @@ public abstract class BaseRepositoryContent<M extends BaseRepositoryContent<M>> 
 	public void setUpdateDate(java.util.Date updateDate) {
 		set("updateDate", updateDate);
 	}
-	
+
 	/**
 	 * 更新时间
 	 */
@@ -65,7 +65,7 @@ public abstract class BaseRepositoryContent<M extends BaseRepositoryContent<M>> 
 	public void setContent(java.lang.String content) {
 		set("content", content);
 	}
-	
+
 	/**
 	 * 知识库内容
 	 */
