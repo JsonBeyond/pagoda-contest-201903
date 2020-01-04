@@ -14,4 +14,5 @@ import java.util.List;
 public class SendMessageOutput {
     private String replyMessage;
     private List<Question> questionList;
+    private String id;
 }

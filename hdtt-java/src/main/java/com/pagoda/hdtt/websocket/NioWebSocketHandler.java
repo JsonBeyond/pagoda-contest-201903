@@ -1,5 +1,6 @@
 package com.pagoda.hdtt.websocket;
 
+import com.alibaba.fastjson.JSON;
 import com.jfinal.plugin.activerecord.Db;
 import com.pagoda.hdtt.aotogen.Question;
 import com.pagoda.hdtt.common.util.BeanUtil;
@@ -95,21 +96,20 @@ public class NioWebSocketHandler extends SimpleChannelInboundHandler<Object> {
         String request = ((TextWebSocketFrame) frame).text();
         logger.debug("服务端收到：" + request);
         String test;
-        if(BeanUtil.checkIsEmpty(request)){
+        if (BeanUtil.checkIsEmpty(request)) {
             test = "我是机器人果果，恭候您多时，很高兴为您服务！您可以发送文字告诉果果您要咨询的问题喔~";
-        }else{
+        } else {
             //1.调用图灵接口 发送消息并获取回复内容
 //        test = TulingClient.sendTulingMessage(message);
+            test = "为了省着点用,返回模拟回复";
         }
-        test = "为了省着点用,返回模拟回复";
         SendMessageOutput output = new SendMessageOutput();
         //封装关联的问题列表
-        Db.find("SELECT * FROM question ORDER BY rand() LIMIT 1;");
         List<Question> questionList = Question.dao.find("SELECT * FROM question ORDER BY rand() LIMIT 3");
         output.setReplyMessage(test);
         output.setQuestionList(questionList);
-        TextWebSocketFrame tws = new TextWebSocketFrame(new Date().toString()
-                + ctx.channel().id() + "：" + output);
+//        output.setId(ctx.channel().id());
+        TextWebSocketFrame tws = new TextWebSocketFrame(JSON.toJSONString(output));
         // 群发
         ChannelSupervise.send2All(tws);
         // 返回【谁发的发给谁】

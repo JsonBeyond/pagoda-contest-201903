@@ -90,15 +90,15 @@ public abstract class BaseQuestion<M extends BaseQuestion<M>> extends Model<M> i
 	/**
 	 * 关联问题id列表,逗号分隔
 	 */
-	public void setRelationQuestionId(java.lang.Integer relationQuestionId) {
+	public void setRelationQuestionId(java.lang.String relationQuestionId) {
 		set("relationQuestionId", relationQuestionId);
 	}
 	
 	/**
 	 * 关联问题id列表,逗号分隔
 	 */
-	public java.lang.Integer getRelationQuestionId() {
-		return getInt("relationQuestionId");
+	public java.lang.String getRelationQuestionId() {
+		return getStr("relationQuestionId");
 	}
 
 	/**
