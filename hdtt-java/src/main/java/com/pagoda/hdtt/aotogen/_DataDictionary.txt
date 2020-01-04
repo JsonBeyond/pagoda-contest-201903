@@ -15,15 +15,28 @@ Table: msg_template
  others       | TEXT(65535)  | YES  |     |                   | 消息其他数据  
 --------------+--------------+------+-----+-------------------+---------
 
+Table: repository_content
+------------+--------------+------+-----+---------+---------
+ Field      | Type         | Null | Key | Default | Remarks 
+------------+--------------+------+-----+---------+---------
+ id         | INT(10)      | NO   | PRI |         |         
+ craeteDate | DATETIME(19) | YES  |     |         | 创建时间    
+ updateDate | DATETIME(19) | YES  |     |         | 更新时间    
+ title      | VARCHAR(255) | YES  |     |         | 知识库标题   
+ content    | VARCHAR(255) | YES  |     |         | 知识库内容   
+ creater    | VARCHAR(255) | YES  |     |         | 创建人     
+ delete     | TINYINT(3)   | YES  |     |         | 是否已删除(0:未删除   1:已删除)
+------------+--------------+------+-----+---------+---------
+
 Table: user
------------+--------------+------+-----+---------+---------
- Field     | Type         | Null | Key | Default | Remarks 
------------+--------------+------+-----+---------+---------
- id        | INT(10)      | NO   | PRI |         |         
- age       | INT(10)      | YES  |     |         | 年龄      
- phone     | VARCHAR(255) | YES  |     |         | 账号      
- password  | VARCHAR(255) | YES  |     |         | 密码      
- nick_name | VARCHAR(255) | YES  |     |         | 用户昵称    
- status    | VARCHAR(255) | YES  |     |         | 状态      
------------+--------------+------+-----+---------+---------
+----------+--------------+------+-----+---------+---------
+ Field    | Type         | Null | Key | Default | Remarks 
+----------+--------------+------+-----+---------+---------
+ id       | INT(10)      | NO   | PRI |         |         
+ age      | INT(10)      | YES  |     |         | 年龄      
+ phone    | VARCHAR(255) | YES  |     |         | 账号      
+ password | VARCHAR(255) | YES  |     |         | 密码      
+ nickName | VARCHAR(255) | YES  |     |         | 用户昵称    
+ status   | VARCHAR(255) | YES  |     |         | 状态      
+----------+--------------+------+-----+---------+---------
 

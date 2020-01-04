@@ -1,5 +1,6 @@
 package com.pagoda.hdtt.controller;
 
+import com.jfinal.core.ActionKey;
 import com.jfinal.plugin.activerecord.Page;
 import com.pagoda.hdtt.aotogen.MsgTemplate;
 import com.pagoda.hdtt.common.exception.ServiceException;

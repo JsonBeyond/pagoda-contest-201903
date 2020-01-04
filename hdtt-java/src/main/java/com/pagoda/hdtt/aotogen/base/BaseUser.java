@@ -17,42 +17,72 @@ public abstract class BaseUser<M extends BaseUser<M>> extends Model<M> implement
 		return getInt("id");
 	}
 
+	/**
+	 * 年龄
+	 */
 	public void setAge(java.lang.Integer age) {
 		set("age", age);
 	}
 	
+	/**
+	 * 年龄
+	 */
 	public java.lang.Integer getAge() {
 		return getInt("age");
 	}
 
+	/**
+	 * 账号
+	 */
 	public void setPhone(java.lang.String phone) {
 		set("phone", phone);
 	}
 	
+	/**
+	 * 账号
+	 */
 	public java.lang.String getPhone() {
 		return getStr("phone");
 	}
 
+	/**
+	 * 密码
+	 */
 	public void setPassword(java.lang.String password) {
 		set("password", password);
 	}
 	
+	/**
+	 * 密码
+	 */
 	public java.lang.String getPassword() {
 		return getStr("password");
 	}
 
+	/**
+	 * 用户昵称
+	 */
 	public void setNickName(java.lang.String nickName) {
-		set("nick_name", nickName);
+		set("nickName", nickName);
 	}
 	
+	/**
+	 * 用户昵称
+	 */
 	public java.lang.String getNickName() {
-		return getStr("nick_name");
+		return getStr("nickName");
 	}
 
+	/**
+	 * 状态
+	 */
 	public void setStatus(java.lang.String status) {
 		set("status", status);
 	}
 	
+	/**
+	 * 状态
+	 */
 	public java.lang.String getStatus() {
 		return getStr("status");
 	}

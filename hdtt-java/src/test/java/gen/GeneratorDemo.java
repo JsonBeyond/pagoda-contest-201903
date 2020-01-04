@@ -48,6 +48,7 @@ public class GeneratorDemo {
 //		gernerator.setRemovedTableNamePrefixes("t_");
 		// 生成
 
+		gernerator.setGenerateRemarks(true);
 		gernerator.generate();
 	}
 }
