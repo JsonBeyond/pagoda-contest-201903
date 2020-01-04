@@ -2,6 +2,8 @@ package com.pagoda.hdtt;
 
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
+import com.jfinal.json.FastJsonFactory;
+import com.jfinal.json.Json;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
@@ -27,6 +29,9 @@ public class HdttConfig extends JFinalConfig {
         PropKit.use("config.properties");
 		me.setDevMode(true);
         me.setViewType(ViewType.JSP);
+//        me.setJsonFactory(new FastJsonFactory());
+        FastJsonFactory factory = new FastJsonFactory();
+
     }
 
     @Override

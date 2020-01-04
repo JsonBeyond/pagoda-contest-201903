@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap">
     <div class="login-content">
-      <h1 class="login-title">登录</h1>
+      <h1 class="login-title">互动天团</h1>
       <div class="login-body">
         <el-form style="width:100%;" label-width="0"
                  @submit.native.prevent>
@@ -47,7 +47,6 @@
 
 <script>
 import { login } from '@/api'
-import { log } from 'util'
 export default {
   name: 'login',
   data () {
@@ -58,6 +57,9 @@ export default {
       submitted: false
     }
   },
+  created() {
+    localStorage.setItem('user_info', JSON.stringify({userName: 'cxm'}))
+  },
   methods: {
     submit () {
       if (!this.username) {
@@ -67,7 +69,8 @@ export default {
       } else {
         login({phone: this.username, password: this.password}).then(res => {
           if (res.status === 10000) {
-            this.$router.push()
+            localStorage.setItem('user_info', JSON.stringify(res.result))
+            this.$router.push({path: '/home'});
           }
         })
       }

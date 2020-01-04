@@ -83,13 +83,13 @@ fetch.aopSend(config => {
   return config;
 });
 
-// fetch.aopReceive(response => {
-//   if (response.errorCode) {
-//     Message.error(response.description);
-//     throw new Error(response.description);
-//   }
-//   return response;
-// });
+fetch.aopReceive(response => {
+  if (response.errorCode) {
+    Message.error(response.description);
+    throw new Error(response.description);
+  }
+  return response;
+});
 
 // 创建场景demo数据
 export const login = (params) => fetch('/hdtt/account/login', params, 'post');

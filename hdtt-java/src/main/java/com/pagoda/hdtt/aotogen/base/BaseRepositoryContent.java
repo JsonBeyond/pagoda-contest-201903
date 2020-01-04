@@ -17,58 +17,86 @@ public abstract class BaseRepositoryContent<M extends BaseRepositoryContent<M>> 
 		return getInt("id");
 	}
 
-	public void setCreateDate(java.util.Date createDate) {
-		set("create_date", createDate);
-	}
-	
-	public java.util.Date getCreateDate() {
-		return get("create_date");
+	/**
+	 * 创建时间
+	 */
+	public void setCraeteDate(java.util.Date craeteDate) {
+		set("craeteDate", craeteDate);
 	}
 
+	/**
+	 * 创建时间
+	 */
+	public java.util.Date getCraeteDate() {
+		return get("craeteDate");
+	}
+
+	/**
+	 * 更新时间
+	 */
 	public void setUpdateDate(java.util.Date updateDate) {
-		set("update_date", updateDate);
-	}
-	
-	public java.util.Date getUpdateDate() {
-		return get("update_date");
+		set("updateDate", updateDate);
 	}
 
+	/**
+	 * 更新时间
+	 */
+	public java.util.Date getUpdateDate() {
+		return get("updateDate");
+	}
+
+	/**
+	 * 知识库标题
+	 */
 	public void setTitle(java.lang.String title) {
 		set("title", title);
 	}
 	
+	/**
+	 * 知识库标题
+	 */
 	public java.lang.String getTitle() {
 		return getStr("title");
 	}
 
-	public void setQuestion(java.lang.String question) {
-		set("question", question);
-	}
-	
-	public java.lang.String getQuestion() {
-		return getStr("question");
-	}
-
-	public void setAnswer(java.lang.String answer) {
-		set("answer", answer);
-	}
-	
-	public java.lang.String getAnswer() {
-		return getStr("answer");
+	/**
+	 * 知识库内容
+	 */
+	public void setContent(java.lang.String content) {
+		set("content", content);
 	}
 
+	/**
+	 * 知识库内容
+	 */
+	public java.lang.String getContent() {
+		return getStr("content");
+	}
+
+	/**
+	 * 创建人
+	 */
 	public void setCreater(java.lang.String creater) {
 		set("creater", creater);
 	}
 	
+	/**
+	 * 创建人
+	 */
 	public java.lang.String getCreater() {
 		return getStr("creater");
 	}
 
+	/**
+	 * 是否已删除(0:未删除   1:已删除)
+	 */
 	public void setDelete(java.lang.Integer delete) {
 		set("delete", delete);
 	}
 	
+	/**
+	 * 是否已删除(0:未删除   1:已删除)
+	 */
 	public java.lang.Integer getDelete() {
 		return getInt("delete");
 	}
