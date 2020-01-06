@@ -8,7 +8,7 @@
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
               <el-menu-item index="/goods-list">商品列表</el-menu-item>
               <el-menu-item index="/consult">咨询</el-menu-item>
-              <!-- <el-menu-item index="/complain">投诉</el-menu-item> -->
+              <!-- <el-menu-item index="/complain">群发</el-menu-item> -->
             </el-menu>
           </el-col>
           <el-col :span="4" class="user-info">

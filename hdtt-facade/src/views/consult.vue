@@ -39,13 +39,15 @@
                 <el-main>
                   <el-input
                     type="textarea"
+                    v-on:keyup.enter="websocketsend"
                     rows="3"
                     placeholder="请输入内容"
                     v-model="textarea">
                   </el-input>
                 </el-main>
-                <el-aside width="100px">
+                <el-aside width="160px">
                   <el-button type="primary" @click="websocketsend">发送</el-button>
+                  <el-button @click="sendAll">群发</el-button>
                 </el-aside>
               </el-container>
             </el-footer>
@@ -94,7 +96,7 @@
     </div>
 </template>
 <script>
-import {getGoodsList} from '@/api'
+import {getGoodsList, sendAll} from '@/api'
 export default {
   data() {
     return {
@@ -118,7 +120,7 @@ export default {
   created(){
     //页面刚进入时开启长连接
     this.initWebSocket()
-    this.seachGoods()
+    // this.seachGoods()
   },
   destroyed() {//页面销毁时关闭长连接
     this.websocketclose();
@@ -156,6 +158,10 @@ export default {
       })
     },
     websocketsend(agentData){ //数据发送 
+      if (!this.textarea) {
+        this.$message.error('请填写需要发送的数据')
+        return
+      }
       this.websocket.send(JSON.stringify({
         message: this.textarea,
         userId: JSON.parse(window.localStorage.getItem('user_info')).id,
@@ -203,7 +209,18 @@ export default {
       }));
       this.msge = row.row.goodsName
       this.dialogVisible = false
-    }
+    },
+    sendAll(agentData){ //数据发送 
+      if (!this.textarea) {
+        this.$message.error('请填写需要发送的数据')
+        return
+      }
+      sendAll({message: this.textarea}).then(res => {
+        console.log(res)
+      });
+      this.msge = '';
+      this.textarea = '';
+    },
   }
 }
 </script>

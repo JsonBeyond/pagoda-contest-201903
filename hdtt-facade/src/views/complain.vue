@@ -3,7 +3,7 @@
       <el-container class="box">
         <el-main>
           <el-container>
-            <el-main class="consult-box">
+            <el-main class="consult-box" id="chatBox-content-demo">
               <div v-for="(item, idx) of msgsList" :key="idx" class="news-box">
                 <div class="right" v-if="item.sendNews">
                   <el-container>
@@ -13,18 +13,18 @@
                       </el-row>
                     </el-main>
                     <el-aside width="50px">
-                      <img src="../assets/user.jpg" />
+                      <img :src="img" />
                     </el-aside>
                   </el-container>
                 </div>
                 <el-container class="left">
                   <el-aside width="50px">
-                    <img src="../assets/user.jpg" />
+                    <img src="../assets/logo.png" />
                   </el-aside>
                   <el-main>
                     <el-row v-if="item.news">
                       <div v-for="(it, index) in item.news" :key="index">
-                        {{it.news}}
+                        {{it}}
                       </div>
                     </el-row>
                     <el-row v-for="(it, index) in item.questionList" :key="index">
@@ -45,24 +45,25 @@
                   </el-input>
                 </el-main>
                 <el-aside width="100px">
-                  <el-button type="primary" @click="websocketsend">发送</el-button>
+                  <el-button type="primary" @click="sendAll">发送</el-button>
                 </el-aside>
               </el-container>
             </el-footer>
           </el-container>
         </el-main>
-        <el-aside width="240px">Aside</el-aside>
       </el-container>
     </div>
 </template>
 <script>
+import {sendAll} from '@/api'
 export default {
   data() {
     return {
       websocket: null,
       textarea: '',
       msgsList: [],
-      msge: ''
+      msge: '',
+      img: JSON.parse(window.localStorage.getItem('user_info')).icon,
     }
   },
   created(){
@@ -83,6 +84,7 @@ export default {
     }, 
     websocketonopen() {
       console.log("WebSocket连接成功");
+      // this.websocket.send(JSON.stringify({}));
     },
     websocketonerror(e) { //错误
       console.log("WebSocket连接发生错误");
@@ -98,18 +100,28 @@ export default {
       }
       this.msge = '';
       this.msgsList.push(obj)
-    },
-    websocketsend(agentData){ //数据发送 
-      this.websocket.send(this.textarea);
-      this.msge = this.textarea;
-      this.textarea = '';
+      this.$nextTick(() => {
+        let container = this.$el.querySelector("#chatBox-content-demo");
+        container.scrollTop = container.scrollHeight;
+      })
     },
     websocketclose(e){ //关闭 
       console.log("connection closed (" + e.code + ")"); 
     },
     questionSend(name) {
-      this.websocket.send(name);
+      this.websocket.send(JSON.stringify({
+        message: name,
+        userId: JSON.parse(window.localStorage.getItem('user_info')).id,
+        type: 'common'
+      }));
       this.msge = name;
+    },
+    sendAll(agentData){ //数据发送 
+      sendAll({message: this.textarea}).then(res => {
+        console.log(res)
+      });
+      this.msge = '';
+      this.textarea = '';
     }
   }
 }

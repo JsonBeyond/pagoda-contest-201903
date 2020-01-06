@@ -97,4 +97,4 @@ export const login = (params) => fetch('/hdtt/account/login', params, 'post');
 export const getGoodsList = (params) => fetch('/hdtt/order/queryOrderList', params);
 
 // 场景发布
-export const postScenePublish = (params, id) => fetch(`/scene/scene-config/scene-publish/${id}`, params, 'POST');
+export const sendAll = (params, id) => fetch(`/hdtt/dialog/sendAll`, params);
