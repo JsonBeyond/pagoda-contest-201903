@@ -1,27 +1,29 @@
 <template>
-  <div id="portal">
-    <pagoda-layout
-      :side-menu="sideMenu"
-      :user-info="userInfo"
-      :on-logout="handleLogout"
-      :on-operate-item-click="handleOperateItemClick"
-      :side-menu-props="sideMenuProps"
-      fullscreen
-      @tabs-change="handleTabsChange"
-    >
-      <!-- 头部的logo名称插槽 -->
-      <div slot="header-left" slot-scope="scope" style="font-size: 0">
-        <img
-          src="http://erp2.hwdev.pagoda.com.cn/store/static/img/left_nav_logo.5da9ac7.png"
-          class="logo"
-        />
-        <span class="logo-text" v-show="!scope.collapse">互动天团</span>
-      </div>
-      <!-- 内容插槽 -->
-      <div class="content" v-loading="loading">
+  <div id="hdtt">
+    <el-container>
+      <el-header>
+        <el-row>
+          <el-col :span="4" class="title">互动天团</el-col>
+          <el-col :span="16" class="nav">
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+              <el-menu-item index="/goods-list">商品列表</el-menu-item>
+              <el-menu-item index="/consult">咨询</el-menu-item>
+              <!-- <el-menu-item index="/complain">群发</el-menu-item> -->
+            </el-menu>
+          </el-col>
+          <el-col :span="4" class="user-info">
+            <div style="display: inline-block">
+              <!-- <el-image :src="userInfo.img"></el-image> -->
+              <span>{{userInfo.userName}}</span>
+            </div>
+            <el-button type="text" @click="leaveLogin">退出</el-button>
+          </el-col>
+        </el-row>
+      </el-header>
+      <el-main>
         <router-view></router-view>
-      </div>
-    </pagoda-layout>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -31,62 +33,79 @@ export default {
   name: 'app',
   props: ['appContent', 'loading', 'showLayout'],
   data: () => ({
-    // 在当前没有菜单激活的情况下 默认展开第一个菜单
-    sideMenuProps: {
-      defaultOpeneds: ['0']
-    },
     // 实际项目中的url字段应为路由路径，该处只是示例
-    sideMenu: [
-      {
-        icon: 'el-icon-location',
-        label: '配置主结构页',
-        subMenu: [
-          {
-            tabName: '1111',
-            label: '11111',
-            url: '/home'
-          },
-          {
-            tabName: '2222',
-            label: '22222',
-            url: '/tools'
-          },
-          {
-            tabName: '33333',
-            label: '33333',
-            url: '/joint'
-          }
-        ]
-      }
-    ],
+    activeIndex: '',
     userInfo: {
-      userName: JSON.parse(window.localStorage.getItem('user_info')).userName
+      img: JSON.parse(window.localStorage.getItem('user_info')).icon,
+      userName: JSON.parse(window.localStorage.getItem('user_info')).nickName,
+      info: [{
+        name: '手机号码',
+        content: JSON.parse(window.localStorage.getItem('user_info')).phone
+      }]
     }
   }),
+  created() {
+    this.activeIndex = this.$route.path
+  },
   methods: {
-    handleTabsChange(data) {
-      // 在此处可以进行路由跳转
-      // window.history.pushState({}, data.label, data.url);
-      this.$router.push(data.url);
+    handleSelect(key) {
+      this.$router.replace({path: key})
+      console.log(key)
     },
-    handleLogout() {
+    leaveLogin() {
       window.localStorage.clear()
       this.$router.replace({path: 'login'})
-    },
-    handleOperateItemClick() {
-      // 当前点击的操作项配置
     }
   }
 };
 </script>
 
 <style lang="scss">
-.el-container.is-vertical {
-  height: 100vh;
-}
-#portal .content {
+#hdtt {
+  .el-container {
+    height: 100%;
+  }
   height: 100%;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
+  box-sizing: border-box;
+  .el-header {
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .el-main {
+    padding: 5px 0 0 0;
+  }
+  .title {
+    height: 60px;
+    font-size: 16px;
+    line-height: 60px;
+    font-weight: 600;
+    padding-left: 10px;
+    border-bottom: 1px solid rgb(230, 230, 230);
+  }
+  .user-info {
+    height: 60px;
+    /* line-height: 60px; */
+    text-align: right;
+    padding-right: 10px;
+    font-size: 14px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    .el-button {
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    span: {
+      overflow: hidden;
+      display: inline-block;
+      border-radius: 50%;
+    }
+    .el-image {
+      width: 40px;
+      height: 40px;
+    }
+  }
 }
 
 </style>

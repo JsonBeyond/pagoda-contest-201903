@@ -1,47 +1,30 @@
 <template>
-  <div class="login-wrap">
-    <div class="login-content">
-      <h1 class="login-title">登录</h1>
-      <div class="login-body">
-        <el-form style="width:100%;" label-width="0"
-                 @submit.native.prevent>
-          <el-alert :title="errMsg"
-                    v-if="errMsg"
-                    class="mar-b-xs"
-                    type="error"
-                    @close="resetMsg">
-          </el-alert>
-          <el-form-item>
-            <el-input class="login-input"
-                      placeholder="请输入用户名"
-                      v-model="username"
-                      size="medium">
-              <i slot="prefix"
-                 class="el-icon-user-solid"></i>
-            </el-input>
-          </el-form-item>
-          <el-form-item style="margin-bottom:36px">
-            <el-input class="login-input"
-                      type="password"
-                      v-model="password"
-                      placeholder="请输入密码"
-                      size="medium">
-              <i slot="prefix"
-                 class="el-icon-s-cooperation"></i>
-            </el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="danger"
-                       :loading="submitted"
-                       native-type="submit"
-                       size="medium"
-                       @click="submit()"
-                       style="width:100%;">{{submitted?'正在登录':'登&nbsp;&nbsp;录'}}</el-button>
-          </el-form-item>
-        </el-form>
+<div>
+  <!-- <pagoda-card-list v-infinite-scroll="load" infinite-scroll-disabled="disabled"> -->
+  <pagoda-card-list>
+    <pagoda-card-list-item v-for="item in 10" :key="item">
+      <div class="pagoda-card-list-item-body">
+        
       </div>
-    </div>
-  </div>
+      <div class="pagoda-card-list-item-footer">
+        <div class="pagoda-card-list-operate">
+          <el-button type="text">下单</el-button>
+        </div>
+        <!-- <div class="pagoda-card-list-operate" @click="setScene(item.sceneID)">
+          <el-button type="text" :disabled="item.status === '3'">配置</el-button>
+        </div>
+        <div class="pagoda-card-list-operate">
+          <el-button type="text" :disabled="item.status === '3'" @click="cancel(item)">作废</el-button>
+        </div>
+        <div class="pagoda-card-list-operate">
+          <el-button type="text" icon="el-icon-share" disabled></el-button>
+        </div> -->
+      </div>
+    </pagoda-card-list-item>
+  </pagoda-card-list>
+  <!-- <p v-if="loading">加载中...</p>
+  <p v-if="noMore">没有更多了</p> -->
+</div>
 
 </template>
 
