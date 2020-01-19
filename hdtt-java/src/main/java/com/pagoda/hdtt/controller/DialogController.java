@@ -37,9 +37,9 @@ public class DialogController extends BaseAPIController{
             //1.调用图灵接口 发送消息并获取回复内容
             replyMessage = TulingClient.sendTulingMessage(message);
         }
-        replyMessage = "为了省着点用,返回模拟回复";
-
+//        replyMessage = "为了省着点用,返回模拟回复";
         SendMessageOutput output = new SendMessageOutput();
+
         //封装关联的问题列表
         List<Question> questionList = Question.dao.find("SELECT * FROM question ORDER BY rand() LIMIT 3");
         List<Integer> relationIdList = questionList.stream().map(question -> question.getId()).collect(Collectors.toList());

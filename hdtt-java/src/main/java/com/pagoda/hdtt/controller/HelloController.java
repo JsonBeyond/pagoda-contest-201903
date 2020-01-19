@@ -1,11 +1,15 @@
 package com.pagoda.hdtt.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.jfinal.core.ActionKey;
 import com.jfinal.plugin.activerecord.Page;
 import com.pagoda.hdtt.aotogen.MsgTemplate;
+import com.pagoda.hdtt.common.JedisClient;
 import com.pagoda.hdtt.common.exception.ServiceException;
 import com.pagoda.hdtt.common.util.BeanUtil;
 import lombok.extern.slf4j.Slf4j;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.params.SetParams;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,10 +58,17 @@ public class HelloController extends BaseAPIController {
      * 查询消息模板详情
      */
     public void queryTemplateById(Integer id){
+        Jedis jedis = JedisClient.getJedis();
         MsgTemplate template = MsgTemplate.dao.findById(id);
+//        jedis.set("template", JSON.toJSONString(template));
+        jedis.set("template1", JSON.toJSONString(template), new SetParams().nx().ex(1000));
         if(BeanUtil.checkIsEmpty(template)){
             throw new ServiceException("未找到对应模板!");
         }
+        String cache = jedis.get("template1");
+        log.info("jedis缓存={}",cache);
+        SetParams setParams = new SetParams();
+
         successResponse(template);
     }
 

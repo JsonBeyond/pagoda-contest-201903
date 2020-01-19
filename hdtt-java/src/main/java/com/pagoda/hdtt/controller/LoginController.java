@@ -68,7 +68,6 @@ public class LoginController extends BaseAPIController {
         getRequest().getSession().removeAttribute(ProjectConstant.SESSION_USER);
         successResponse(true);
     }
-
     /**
      * 注销
      * @param userId 用户id
